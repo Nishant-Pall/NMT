@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(1, 4, 16);
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50rem;
+}
+.container .row {
+    width: 100%;
+}
+.container .translate-button {
+    font-size: 2em;
+}
+.text-area {
+    font-size: 1.3em;
+    border-radius: 5px;
+    display: flex;
+    background-color: whitesmoke !important;
+    /* justify-content: center;
+    text-align: center; */
+}
+
+.input-header {
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.text-body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.container .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.container .button .btn-block {
+    width: 80%;
+}
