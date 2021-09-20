@@ -6,6 +6,7 @@
 torch/
 downloads/
 
+__pycache__
 
 # dependencies
 /node_modules

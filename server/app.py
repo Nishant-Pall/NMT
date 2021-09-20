@@ -8,7 +8,7 @@ from pydantic import BaseModel
 import uvicorn
 import numpy as np
 import pickle
-LATENT_DIM_DECODER = 128
+LATENT_DIM_DECODER = 256
 
 
 def softmax_over_time(x):
