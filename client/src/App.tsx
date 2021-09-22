@@ -1,4 +1,4 @@
-import React, { Fragment, FC, useState } from "react";
+import React, { Fragment, FC, useState, useEffect } from "react";
 import api from "./services/api";
 
 const App: FC = () => {
@@ -10,6 +10,17 @@ const App: FC = () => {
         });
         setOutput(translation.data.predicted_translation);
     };
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            const translation = await api.post("/predict", {
+                input_text: input,
+            });
+            setOutput(translation.data.predicted_translation);
+        }, 1000);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [input]);
     return (
         <Fragment>
             <div className="container">
