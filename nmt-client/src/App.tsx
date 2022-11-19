@@ -1,4 +1,5 @@
 import React, { Fragment, FC, useState, useEffect } from "react";
+import Textarea from "./components/textarea";
 import api from "./services/api";
 
 const App: FC = () => {
@@ -30,18 +31,17 @@ const App: FC = () => {
                             <h4>English text</h4>
                         </div>
                         <div className="text-body">
-                            <form>
-                                <textarea
-                                    value={input}
-                                    onChange={(e) => {
-                                        setInput(e.target.value);
-                                    }}
-                                    placeholder="Input english sentence"
-                                    className="text-area"
-                                    cols={30}
-                                    rows={10}
-                                ></textarea>
-                            </form>
+                            <Textarea
+                                value={input}
+                                onChange={(e) => {
+                                    setInput(e);
+                                }}
+                                disabled={false}
+                                placeholder="Input english sentence"
+                                className="text-area"
+                                cols={30}
+                                rows={10}
+                            />
                         </div>
                     </div>
                     <div className="button col-lg-4">
@@ -57,16 +57,14 @@ const App: FC = () => {
                             <h4>Spanish translation</h4>
                         </div>
                         <div className="text-body">
-                            <form>
-                                <textarea
-                                    value={output}
-                                    disabled={true}
-                                    placeholder="Get translation here"
-                                    className="text-area"
-                                    cols={30}
-                                    rows={10}
-                                ></textarea>
-                            </form>
+                            <Textarea
+                                value={output}
+                                disabled={true}
+                                placeholder="Get translation here"
+                                className="text-area"
+                                cols={30}
+                                rows={10}
+                            />
                         </div>
                     </div>
                 </div>
