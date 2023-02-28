@@ -1,27 +1,31 @@
-import React, { Fragment, FC, useState, useEffect } from "react";
+import React, { Fragment, FC, useState, useEffect, useCallback } from "react";
 import Textarea from "./components/textarea";
 import api from "./services/api";
 
 const App: FC = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
-    const getTranslation = async () => {
+
+    const requestTranslation = useCallback(async () => {
         const translation = await api.post("/predict", {
             input_text: input,
         });
         setOutput(translation.data.predicted_translation);
+    }, [input]);
+
+    const getTranslation = async () => {
+        requestTranslation();
     };
+
     useEffect(() => {
         const timer = setTimeout(async () => {
-            const translation = await api.post("/predict", {
-                input_text: input,
-            });
-            setOutput(translation.data.predicted_translation);
+            requestTranslation();
         }, 1000);
         return () => {
             clearTimeout(timer);
         };
-    }, [input]);
+    }, [input, requestTranslation]);
+
     return (
         <Fragment>
             <div className="container">
