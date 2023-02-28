@@ -1,4 +1,4 @@
-import React, { Fragment, FC } from "react";
+import React, { Fragment, FC, memo } from "react";
 type Props = {
     value: string;
     placeholder: string;
@@ -31,4 +31,4 @@ const Textarea: FC<Props> = (props: Props) => {
     );
 };
 
-export default Textarea;
+export default memo(Textarea);
