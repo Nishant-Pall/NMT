@@ -3,15 +3,22 @@ type Props = {
     value: string;
     placeholder: string;
     disabled: boolean;
-    rows: number;
-    cols: number;
+    rows?: number;
+    cols?: number;
     className: string;
     onChange?: (params: string) => void;
 };
 
 const Textarea: FC<Props> = (props: Props) => {
-    const { disabled, value, onChange, className, rows, cols, placeholder } =
-        props;
+    const {
+        disabled,
+        value,
+        onChange,
+        className,
+        rows = 10,
+        cols = 30,
+        placeholder,
+    } = props;
     return (
         <Fragment>
             <form>

@@ -1,16 +1,23 @@
-import React, { Fragment, FC, useState, useEffect, useCallback } from "react";
+import React, {
+    Fragment,
+    FC,
+    useState,
+    useEffect,
+    useCallback,
+    useRef,
+} from "react";
 import Textarea from "./components/textarea";
 import api from "./services/api";
 
 const App: FC = () => {
     const [input, setInput] = useState("");
-    const [output, setOutput] = useState("");
+    let outputRef = useRef("");
 
     const requestTranslation = useCallback(async () => {
         const translation = await api.post("/predict", {
             input_text: input,
         });
-        setOutput(translation.data.predicted_translation);
+        outputRef.current = translation.data.predicted_translation;
     }, [input]);
 
     const getTranslation = async () => {
@@ -18,12 +25,14 @@ const App: FC = () => {
     };
 
     useEffect(() => {
-        const timer = setTimeout(async () => {
-            requestTranslation();
-        }, 1000);
-        return () => {
-            clearTimeout(timer);
-        };
+        if (input) {
+            const timer = setTimeout(() => {
+                requestTranslation();
+            }, 1000);
+            return () => {
+                clearTimeout(timer);
+            };
+        }
     }, [input, requestTranslation]);
 
     return (
@@ -43,8 +52,6 @@ const App: FC = () => {
                                 disabled={false}
                                 placeholder="Input english sentence"
                                 className="text-area"
-                                cols={30}
-                                rows={10}
                             />
                         </div>
                     </div>
@@ -62,12 +69,10 @@ const App: FC = () => {
                         </div>
                         <div className="text-body">
                             <Textarea
-                                value={output}
+                                value={outputRef.current}
                                 disabled={true}
                                 placeholder="Get translation here"
                                 className="text-area"
-                                cols={30}
-                                rows={10}
                             />
                         </div>
                     </div>
